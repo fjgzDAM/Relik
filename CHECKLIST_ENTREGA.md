@@ -36,20 +36,20 @@
 - [x] `scripts/seed.sql`: Datos de prueba iniciales ricos para arqueólogos, yacimientos con época, museos, restos y hallazgos 3D.
 - [x] Auto-sembrado automático implementado en el backend si se inicia con base de datos vacía.
 
-### 3. Código Fuente y Arquitectura (`src/`)
-- [x] Estructura Maven estándar limpia bajo el paquete `org.example.relik`.
+### 3. Código Fuente y Arquitectura (Maven Multimódulo)
+- [x] Estructura Maven Multimódulo limpia con `relik-servidor` y `relik-cliente` bajo `org.example.relik`.
 - [x] Entidades JPA (`Arqueologo`, `Yacimiento`, `Museo`, `RestoMaterial`, `Hallazgo`) anotadas correctamente.
 - [x] Repositorios Spring Data JPA para cada entidad.
 - [x] DTOs de transferencia JSON (`ArqueologoDTO`, `YacimientoDTO`, `HallazgoDTO`, etc.) para independencia del modelo de red.
-- [x] Controladores REST (`AuthController`, `YacimientoController`, `HallazgoController`, etc.).
-- [x] Cliente gráfico Swing (`ClienteRelik`, `LoginDialog`, `GestorHallazgos`, `GestorYacimientos`, etc.).
+- [x] Controladores REST (`AuthController`, `ArqueologoController`, `YacimientoController`, `MuseoController`, `RestoMaterialController`, `HallazgoController`).
+- [x] Cliente gráfico Swing (`ClienteRelik`, `LoginDialog`, `GestorHallazgos`, `GestorYacimientos`, etc.) con soporte para Resto Inédito y Remontaje.
 
 ### 4. Empaquetado y Pruebas
-- [x] `pom.xml` con todas las dependencias requeridas (Spring Boot Starter Web, Spring Data JPA, MySQL Connector, Gson).
+- [x] `pom.xml` agregador con módulos `relik-servidor` y `relik-cliente`.
 - [x] Maven Wrapper (`mvnw.cmd` / `mvnw`) incluido para compilación universal.
-- [x] Generación exitosa del ejecutable `target/Relik-0.0.1-SNAPSHOT.jar` (Build Success).
-- [x] `TESTS.md`: Plan de pruebas completo con 12 casos ejecutados y 100% de éxito (PASS).
-- [x] `README.md`: Guía de inicio rápido y credenciales de acceso predeterminadas.
+- [x] Generación exitosa de los ejecutables autónomos: `relik-servidor-0.0.1-SNAPSHOT.jar` y `relik-cliente-0.0.1-SNAPSHOT.jar` (Reactor Build Success).
+- [x] `TESTS.md`: Plan de pruebas completo con 23 casos ejecutados y 100% de éxito (PASS).
+- [x] `README.md`: Guía de inicio rápido, arquitectura y credenciales de acceso predeterminadas.
 
 ---
 

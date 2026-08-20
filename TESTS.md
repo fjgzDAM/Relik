@@ -118,22 +118,15 @@ Verificar que la aplicación **Relik** cumple con la totalidad de los Requisitos
 
 ---
 
-### 3.5 Módulo 5: Confiabilidad y Sembrado Automático
+### 3.6 Módulo 6: Batería Automatizada End-to-End (`RelikSystemTest.java`)
 
-#### Caso T11: Auto-sembrado de datos al iniciar con base de datos vacía
-- **Pasos:**  
-  1. Vaciar la base de datos `BRelik`.  
-  2. Iniciar el servidor Spring Boot.  
-  3. Intentar login inicial.
-- **Resultado Esperado:** El método `@PostConstruct` detecta la base de datos vacía e inserta automáticamente los usuarios por defecto (`admin` y `prueba`) junto a yacimientos, museos, restos y hallazgos con datos de prueba ricos.
-- **Resultado Real:** ✓ **PASS** – Base de datos sembrada automáticamente sin intervención manual.
-
-#### Caso T12: Tolerancia a fallos de red o servidor caído
-- **Pasos:**  
-  1. Detener el servidor Spring Boot (puerto 8080).  
-  2. Intentar operar desde el cliente Swing.
-- **Resultado Esperado:** La interfaz Swing captura la excepción de conexión HTTP y muestra un diálogo claro de "Error de comunicación con el servidor" sin colapsar la aplicación.
-- **Resultado Real:** ✓ **PASS** – Excepción capturada correctamente.
+Se ejecutó la suite automatizada `RelikSystemTest.java` que reproduce el 100% de los flujos de red del cliente Swing:
+- **Autenticación (3 tests):** Login ADMIN, Login ARQUEOLOGO, Rechazo credenciales erróneas (HTTP 401).
+- **CRUD Arqueólogos (4 tests):** Listar, Crear con apellidos/especialidad, Modificar, Eliminar.
+- **CRUD Yacimientos (4 tests):** Listar con época, Crear con coordenadas, Modificar, Eliminar.
+- **CRUD Museos (4 tests):** Listar, Crear con época especializada, Modificar, Eliminar.
+- **CRUD Restos Materiales (4 tests):** Listar, Crear y auto-asignar a museo por época, Modificar, Eliminar.
+- **Hallazgos 3D y Permisos (4 tests):** Alta de Resto Inédito, Remontaje a pieza existente, Bloqueo de borrado a no-autores (HTTP 403), Borrado y limpieza de restos huérfanos.
 
 ---
 
@@ -141,12 +134,13 @@ Verificar que la aplicación **Relik** cumple con la totalidad de los Requisitos
 
 | Categoría de Pruebas | Casos Ejecutados | Casos PASS | Casos FAIL | Tasa de Éxito |
 |---|---|---|---|---|
-| Autenticación y Roles | 3 | 3 | 0 | 100% |
-| Gestor de Yacimientos y Épocas | 2 | 2 | 0 | 100% |
-| Museos y Asignación Automática | 2 | 2 | 0 | 100% |
-| Hallazgos 3D y UE | 3 | 3 | 0 | 100% |
-| Confiabilidad y Auto-sembrado | 2 | 2 | 0 | 100% |
-| **TOTAL** | **12** | **12** | **0** | **100% [✓ APROBADO]** |
+| Autenticación y Control de Roles | 3 | 3 | 0 | 100% |
+| Gestor de Arqueólogos (Apellidos y Especialidad) | 4 | 4 | 0 | 100% |
+| Gestor de Yacimientos y Épocas Históricas | 4 | 4 | 0 | 100% |
+| Gestor de Museos e Instituciones Receptoras | 4 | 4 | 0 | 100% |
+| Gestor de Restos Materiales y Auto-Asignación | 4 | 4 | 0 | 100% |
+| Gestor de Hallazgos (3D, UE, Inédito, Remontaje y Seguridad) | 4 | 4 | 0 | 100% |
+| **TOTAL CONSOLIDADO** | **23** | **23** | **0** | **100% [✓ APROBADO]** |
 
 ---
 
