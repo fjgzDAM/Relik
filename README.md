@@ -33,7 +33,7 @@ Relik es una solución software desarrollada con **Spring Boot** y una interfaz 
 
 ---
 
-## 🚀 Inicio Rápido (5 minutos)
+## Inicio Rápido (5 minutos)
 
 ### 1. Preparar la Base de Datos
 
