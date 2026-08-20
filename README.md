@@ -222,18 +222,17 @@ Resumen: La aplicación ha sido testeada en:
 
 Para reportar bugs o sugerencias:
 - Abre un issue en el repositorio
-- O contacta al desarrollador: [tu email si lo deseas incluir]
 
 ---
 
-## 📄 Licencia
+## Licencia
 
 Este proyecto es de código abierto desarrollado como trabajo académico.  
 Licencia: GNU 3.0
 
 ---
 
-## 🎉 Próximas Versiones (Roadmap)
+## Próximas Versiones (Roadmap)
 
 - **v1.1** – Mejoras en UI
 - **v1.2** – API REST + cliente web
