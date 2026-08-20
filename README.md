@@ -1,2 +1,2 @@
 # Relik
-Aplicación de escritorio que permite al arqueólogo el registro de hallazgos materiales en yacimientos arqueológicos.
+Aplicación de escritorio con arquitectura cliente/servidor que permite al arqueólogo el registro de hallazgos materiales en yacimientos arqueológicos.
