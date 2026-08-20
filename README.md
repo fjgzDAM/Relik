@@ -1,249 +1,118 @@
 ![Relik](https://img.shields.io/badge/Relik-v1.0--release-blue)
-![Java](https://img.shields.io/badge/Java-17+-green)
+![Java](https://img.shields.io/badge/Java-17%2F21-green)
 ![Spring%20Boot](https://img.shields.io/badge/Spring%20Boot-3.4.2-brightgreen)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0+-orange)
+![License](https://img.shields.io/badge/Licencia-CC%20BY--SA%204.0-lightgrey)
 
-# Relik – Aplicación de Gestión de Hallazgos Arqueológicos
+# Relik – Sistema de Registro y Gestión de Hallazgos Arqueológicos
 
-**Proyecto Final de Ciclo Superior en Desarrollo de Aplicaciones Multiplataforma**
-
-Una aplicación de escritorio intuitiva que facilita el registro y gestión centralizada de hallazgos arqueológicos en excavaciones de campo.
+**Proyecto Fin de Ciclo (PFC) - Formación Profesional de Grado Superior**  
+**Ciclo Formativo:** Desarrollo de Aplicaciones Multiplataforma (DAM)  
+**Centro Educativo:** IES José Luis Martínez Palomo  
 
 ---
 
 ## ¿Qué es Relik?
 
-Relik es una solución software desarrollada con **Spring Boot** y una interfaz gráfica en **Swing** que permite a arqueólogos:
+**Relik** es una solución software multiplataforma diseñada para la automatización, documentación y registro en tiempo real de excavaciones arqueológicas a pie de campo. Sustituye el registro manual tradicional en papel por una plataforma digital centralizada y desacoplada mediante arquitectura **Cliente-Servidor (API REST HTTP)**.
 
-✅ Registrar nuevos hallazgos con contexto completo (arqueólogo, yacimiento, resto material)  
-✅ Gestionar yacimientos, museos y catálogos de restos materiales  
-✅ Mantener una base de datos centralizada y consistente  
-✅ Reemplazar el trabajo tradicional en papel por un flujo digital eficiente  
+### Características Principales:
+- ✅ **Micro-Localización Espacial 3D y Estratigrafía:** Registro tridimensional exacto de hallazgos mediante **Cuadrícula/Sector**, **Coordenadas Planas Eje X y Eje Y**, **Cota Z de Profundidad** (nivel topográfico) y **Unidad Estratigráfica (UE)**.
+- ✅ **Asignación Automática de Museos:** Clasificación de restos materiales con asignación automatizada al museo receptor según la **Época Histórica** del resto y la especialización del museo.
+- ✅ **Control de Acceso y Permisos por Rol:** Sistema de autenticación con diferenciación de roles (`ADMIN` para administración total y `ARQUEOLOGO` para técnicos de campo).
+- ✅ **Interfaz Gráfica de Alto Contraste:** UI Swing con diseño propio en tonos arqueológicos (`UITheme`), optimizada para pantallas portátiles en condiciones de campo.
+- ✅ **Arquitectura Desacoplada:** Servidor Spring Boot 3 con servidor Tomcat embebido y persistencia en MySQL 8.0.
 
 ---
 
 ## 📋 Requisitos del Sistema
 
-- **Java:** 17 o superior
-- **MySQL:** 5.7 o superior (ej. XAMPP)
-- **RAM:** 512 MB mínimo, 1 GB recomendado
-- **Disco:** 200 MB
-- **S.O.:** Windows, macOS, Linux
-- **Maven:** (incluido en el proyecto como wrapper mvnw)
+- **Java Runtime / JDK:** Java 17 o 21.
+- **Base de Datos:** MySQL 8.0+ (Servidor independiente o vía XAMPP).
+- **Herramienta de Compilación:** Maven 3.6+ (Incluido wrapper `mvnw.cmd`).
+- **Sistema Operativo:** Windows, macOS, Linux.
 
 ---
 
-## 🚀 Inicio Rápido (5 minutos)
+## 🚀 Inicio Rápido
 
-### 1. Preparar la Base de Datos
+### 1. Preparar la Base de Datos MySQL
+En tu gestor de base de datos (phpMyAdmin o consola MySQL), ejecuta los scripts ubicados en la carpeta `scripts/`:
+```sql
+SOURCE scripts/schema.sql;
+SOURCE scripts/seed.sql;
+```
 
-#### Opción A: phpMyAdmin (XAMPP)
-1. Abre XAMPP Control Panel → inicia MySQL
-2. Abre navegador → `localhost/phpmyadmin`
-3. Copia el contenido de `scripts/schema.sql` y ejecútalo en la pestaña SQL
-4. (Opcional) ejecuta `scripts/seed.sql` para datos iniciales
-
-#### Opción B: Línea de Comandos
+### 2. Compilar y Empaquetar Ambos Módulos
+Desde el directorio raíz del proyecto:
 ```powershell
-# Abre el cliente MySQL
-cd "C:\xampp\mysql\bin"
-.\mysql.exe -u root
-
-# En el prompt de MySQL:
-SOURCE "E:/Nubes/Profe/.../scripts/schema.sql";
-SOURCE "E:/Nubes/Profe/.../scripts/seed.sql";
-EXIT;
+.\mvnw.cmd clean package -DskipTests
 ```
 
-### 2. Configurar Credenciales (si es necesario)
-
-Abre `src/main/resources/application.properties` y verifica:
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/BArquealia
-spring.datasource.username=root
-spring.datasource.password=
-```
-Si tu MySQL usa contraseña, actualiza `spring.datasource.password`.
-
-### 3. Compilar y Ejecutar
-
+### 3. Arrancar el Servidor REST (`relik-servidor`)
+Ejecuta el paquete ejecutable del servidor:
 ```powershell
-cd "E:\Nubes\Profe\OneDrive - Consejería de Educación, Formación Profesional y Empleo\DAM\Proyecto\Arquealia"
-
-# Compilar
-.\mvnw.cmd -DskipTests package
-
-# Ejecutar
-java -jar target\Arquealia-0.0.1-SNAPSHOT.jar
+java -jar relik-servidor\target\relik-servidor-0.0.1-SNAPSHOT.jar
 ```
+*El servidor iniciará Tomcat embebido en el puerto 8080 (`http://localhost:8080/api`).*
 
-**¡Listo!** La interfaz Swing se abre automáticamente. 
-
----
-
-## 📚 Guía de Uso
-
-### Interfaz Gráfica
-
-La aplicación tiene 5 pestañas principales:
-
-#### 1️⃣ **Yacimientos** (lugares de excavación)
-- **Nuevo:** Añade un yacimiento con nombre
-- **Editar:** Modifica el nombre de uno seleccionado
-- **Eliminar:** Borra el yacimiento de la BD
-- **Refrescar:** Recarga la lista
-
-#### 2️⃣ **Museos** (destino de restos)
-- **Nuevo:** Crea un museo especificando nombre y época especializada
-- **Editar:** Modifica nombre/época
-- **Eliminar:** Elimina el museo
-- **Refrescar:** Actualiza lista
-
-#### 3️⃣ **Arqueólogos** (profesionales registrados)
-- **Nuevo:** Registra un arqueólogo (nombre, correo, contraseña)
-- **Eliminar:** Borra del registro
-- **Refrescar:** Recarga
-
-#### 4️⃣ **Restos** (objetos hallados)
-- **Nuevo:** Crea un resto material (nombre, época, tipología)
-- **Nota:** Se asigna automáticamente al museo de su época
-- **Editar/Eliminar:** Operaciones estándar
-
-#### 5️⃣ **Hallazgos** (registros de descubrimientos)
-- **Nuevo:** Crea un hallazgo seleccionando:
-  - Arqueólogo que realizó el hallazgo
-  - Yacimiento donde fue hallado
-  - Resto material encontrado
-- El timestamp se registra automáticamente
-
----
-
-## 📂 Estructura del Proyecto
-
-```
-Arquealia/
-├── src/
-│   ├── main/
-│   │   ├── java/org/example/arquealia/
-│   │   │   ├── ArquealiaApplication.java (main + CommandLineRunner)
-│   │   │   ├── dominio/
-│   │   │   │   ├── Arqueologo.java
-│   │   │   │   ├── Hallazgo.java
-│   │   │   │   ├── Museo.java
-│   │   │   │   ├── RestoMaterial.java
-│   │   │   │   └── Yacimiento.java
-│   │   │   ├── modelo/
-│   │   │   │   ├── ModeloInterface.java
-│   │   │   │   ├── ModeloInterfaceImpl.java
-│   │   │   │   ├── YacimientoRepository.java
-│   │   │   │   ├── MuseoRepository.java
-│   │   │   │   ├── ArqueologoRespository.java
-│   │   │   │   ├── RestoMaterialRepository.java
-│   │   │   │   └── HallazgoRepository.java
-│   │   │   └── ui/
-│   │   │       ├── MainWindow.java (ventana principal Swing)
-│   │   │       └── UIStarter.java (listener de arranque)
-│   │   └── resources/
-│   │       └── application.properties (configuración)
-│   └── test/
-│       └── java/.../ArquealiaApplicationTests.java
-├── scripts/
-│   ├── schema.sql (crear BD y tablas)
-│   ├── seed.sql (datos iniciales de prueba)
-│   └── cleanup.sql (limpiar duplicados si los hay)
-├── pom.xml (dependencias Maven)
-├── README.md (este archivo)
-├── MEMORIA.md (documentación técnica del proyecto)
-├── TESTS.md (plan de pruebas y resultados)
-└── mvnw.cmd / mvnw (Maven Wrapper para Windows/Unix)
+### 4. Arrancar la Aplicación Cliente (`relik-cliente`)
+En otra terminal, ejecuta el cliente de escritorio independiente:
+```powershell
+java -jar relik-cliente\target\relik-cliente-0.0.1-SNAPSHOT.jar
 ```
 
 ---
 
-## 🛠️ Tecnologías
+## 🔑 Credenciales de Acceso por Defecto (Auto-sembradas)
 
-| Tecnología | Versión | Uso |
-|---|---|---|
-| Java | 17 | Lenguaje principal |
-| Spring Boot | 3.4.2 | Framework web/aplicación |
-| Spring Data JPA | - | Acceso a datos ORM |
-| Hibernate | 6.6.5 | ORM de mapeo objeto-relacional |
-| MySQL Connector | 8.0+ | Driver MySQL |
-| Swing | - | UI de escritorio |
-| Maven | 3.6+ | Build tool |
+- **Administrador:**  
+  - Email: `admin@relik.com`  
+  - Contraseña: `admin`  
+  - Rol: `ADMIN` (Acceso total a creación, edición y borrado)
 
----
-
-## 🧪 Pruebas
-
-Consulta `TESTS.md` para ver:
-- Plan detallado de pruebas (16 casos)
-- Resultados ejecutados (100% PASS)
-- Observaciones y recomendaciones
-
-Resumen: La aplicación ha sido testeada en:
-- ✓ Operaciones CRUD de todas las entidades
-- ✓ Persistencia en BD
-- ✓ Manejo de errores y duplicados
-- ✓ Usabilidad de interfaz
+- **Arqueólogo de Campo:**  
+  - Email: `prueba@example.com` (o `elena.ramos@relik.com`)  
+  - Contraseña: `1234`  
+  - Rol: `ARQUEOLOGO` (Permiso para crear hallazgos y borrar únicamente los creados por sí mismo)
 
 ---
 
-## 📝 Documentación
+## 📂 Estructura del Proyecto (Maven Multimódulo)
 
-- **MEMORIA.md** – Documento académico completo del proyecto (requisitos, diseño, implementación)
-- **TESTS.md** – Plan de pruebas, casos y resultados
-- **README.md** – Este archivo (guía de uso rápido)
-
----
-
-## 🐛 Solución de Problemas
-
-### "No se puede conectar a MySQL"
-- Verifica que MySQL esté en marcha (XAMPP Control Panel)
-- Revisa credenciales en `application.properties`
-- Asegúrate de que `BArquealia` BD existe
-
-### "Duplicado entry" en logs
-- Ejecuta `scripts/cleanup.sql` para limpiar duplicados previos
-- La app no crashea; solo registra un WARNING
-
-### "Puerto 8080 en uso"
-- Por diseño, la app usa puerto aleatorio (0) en desarrollo
-- En producción, cambia `server.port=8080` en `application.properties`
-
-### La UI no aparece
-- Verifica que Java tiene soporte para Swing (Windows sí; en Linux/VM puede necesitar configuración X11)
-- Reintenta ejecutar con: `java -Djava.awt.headless=false -jar ...jar`
-
----
-
-## 📞 Soporte y Contacto
-
-Para reportar bugs o sugerencias:
-- Abre un issue en el repositorio
-- O contacta al desarrollador: [tu email si lo deseas incluir]
+```
+Relik/ (directorio raíz)
+├── pom.xml                               <-- POM Padre agregador (<packaging>pom</packaging>)
+├── mvnw / mvnw.cmd / .mvn/               <-- Maven Wrapper raíz para compilar todo
+├── scripts/                              <-- Scripts SQL (schema.sql, seed.sql)
+│
+├── relik-servidor/                       <-- MÓDULO BACKEND REST API (Spring Boot)
+│   ├── pom.xml                           <-- Dependencias de Spring Boot, JPA, MySQL
+│   └── src/
+│       ├── main/
+│       │   ├── resources/application.properties
+│       │   └── java/org/example/relik/
+│       │       ├── RelikApplication.java <-- Main del microservicio
+│       │       ├── controlador/          <-- Controladores REST (@RestController)
+│       │       ├── dominio/              <-- Entidades JPA (@Entity)
+│       │       ├── modelo/               <-- Repositorios y Servicios (@Service)
+│       │       └── dto/                  <-- Objetos de transferencia (DTO)
+│       └── test/java/org/example/relik/test/RelikSystemTest.java
+│
+└── relik-cliente/                        <-- MÓDULO FRONTEND DESKTOP (Java Swing)
+    ├── pom.xml                           <-- Solo dependencias de cliente (Gson)
+    └── src/main/java/org/example/relik/cliente/
+        ├── ClienteRelik.java             <-- Main Class del cliente
+        ├── SessionManager.java           <-- Manejo de sesión y rol en memoria
+        ├── UITheme.java                  <-- Paleta temática arqueológica
+        ├── LoginDialog.java              <-- Ventana modal de login
+        └── Gestor*.java                  <-- Ventanas de gestión (Arqueólogos, Hallazgos, etc.)
+```
 
 ---
 
 ## 📄 Licencia
 
-Este proyecto es de código abierto desarrollado como trabajo académico.  
-Licencia: MIT (2026)
+Este proyecto está bajo la licencia **Creative Commons Atribución-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)**.
 
----
-
-## 🎉 Próximas Versiones (Roadmap)
-
-- **v1.1** – Migración UI a JavaFX
-- **v1.2** – API REST + cliente web
-- **v2.0** – Autenticación y control de roles
-- **v2.1** – Exportación a CSV/PDF
-- **v3.0** – Sincronización remota y en-línea
-
----
-
-**Versión Actual:** 1.0 (Release)  
-**Fecha:** 16 de mayo de 2026  
-**Estado:** Producción (MVP)
 

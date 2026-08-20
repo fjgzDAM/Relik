@@ -1,14 +1,17 @@
 -- Schema for Relik (MySQL)
 -- Ajusta el nombre de la base de datos si procede
-CREATE DATABASE IF NOT EXISTS BArquealia CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE BArquealia;
+CREATE DATABASE IF NOT EXISTS BRelik CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE BRelik;
 
 -- Table: tarqueologo
 CREATE TABLE IF NOT EXISTS tarqueologo (
   id_arqueologo INT AUTO_INCREMENT PRIMARY KEY,
   nombre VARCHAR(150) NOT NULL,
+  apellidos VARCHAR(150) DEFAULT '',
+  especialidad VARCHAR(150) DEFAULT 'Arqueología General',
   correo VARCHAR(150) NOT NULL,
-  contrasena VARCHAR(150) NOT NULL
+  contrasena VARCHAR(150) NOT NULL,
+  rol VARCHAR(50) NOT NULL DEFAULT 'ARQUEOLOGO'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Table: tyacimiento
@@ -17,6 +20,7 @@ CREATE TABLE IF NOT EXISTS tyacimiento (
   nombre VARCHAR(200) NOT NULL,
   ubicacion VARCHAR(255),
   coordenadas VARCHAR(255),
+  epoca VARCHAR(100) DEFAULT 'General',
   fecha_descubrimiento DATE,
   fecha_inicio DATE,
   fecha_fin DATE,
@@ -46,6 +50,12 @@ CREATE TABLE IF NOT EXISTS tresto_material (
 CREATE TABLE IF NOT EXISTS thallazgo (
   id_hallazgo INT AUTO_INCREMENT PRIMARY KEY,
   fecha_hallazgo DATETIME NOT NULL,
+  campana VARCHAR(100) DEFAULT 'Campaña 2026',
+  cuadricula VARCHAR(50) DEFAULT 'S/C',
+  coordenada_x VARCHAR(50) DEFAULT '0.0m',
+  coordenada_y VARCHAR(50) DEFAULT '0.0m',
+  cota_z VARCHAR(50) DEFAULT '0.0m',
+  unidad_estratigrafica VARCHAR(50) DEFAULT 'UE-100',
   id_arqueologo INT NOT NULL,
   id_yacimiento INT NOT NULL,
   id_resto INT NOT NULL,
