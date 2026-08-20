@@ -15,14 +15,14 @@ Una aplicación de escritorio intuitiva que facilita el registro y gestión cent
 
 Relik es una solución software desarrollada con **Spring Boot** y una interfaz gráfica en **Swing** que permite a arqueólogos:
 
-✅ Registrar nuevos hallazgos con contexto completo (arqueólogo, yacimiento, resto material)  
-✅ Gestionar yacimientos, museos y catálogos de restos materiales  
-✅ Mantener una base de datos centralizada y consistente  
-✅ Reemplazar el trabajo tradicional en papel por un flujo digital eficiente  
+- Registrar nuevos hallazgos con contexto completo (arqueólogo, yacimiento, resto material)  
+- Gestionar yacimientos, museos y catálogos de restos materiales  
+- Mantener una base de datos centralizada y consistente  
+- Reemplazar el trabajo tradicional en papel por un flujo digital eficiente  
 
 ---
 
-## 📋 Requisitos del Sistema
+## Requisitos del Sistema
 
 - **Java:** 17 o superior
 - **MySQL:** 5.7 o superior (ej. XAMPP)
@@ -81,35 +81,35 @@ java -jar target\Arquealia-0.0.1-SNAPSHOT.jar
 
 ---
 
-## 📚 Guía de Uso
+## Guía de Uso
 
 ### Interfaz Gráfica
 
 La aplicación tiene 5 pestañas principales:
 
-#### 1️⃣ **Yacimientos** (lugares de excavación)
+#### 1️ **Yacimientos** (lugares de excavación)
 - **Nuevo:** Añade un yacimiento con nombre
 - **Editar:** Modifica el nombre de uno seleccionado
 - **Eliminar:** Borra el yacimiento de la BD
 - **Refrescar:** Recarga la lista
 
-#### 2️⃣ **Museos** (destino de restos)
+#### 2️ **Museos** (destino de restos)
 - **Nuevo:** Crea un museo especificando nombre y época especializada
 - **Editar:** Modifica nombre/época
 - **Eliminar:** Elimina el museo
 - **Refrescar:** Actualiza lista
 
-#### 3️⃣ **Arqueólogos** (profesionales registrados)
+#### 3️ **Arqueólogos** (profesionales registrados)
 - **Nuevo:** Registra un arqueólogo (nombre, correo, contraseña)
 - **Eliminar:** Borra del registro
 - **Refrescar:** Recarga
 
-#### 4️⃣ **Restos** (objetos hallados)
+#### 4️ **Restos** (objetos hallados)
 - **Nuevo:** Crea un resto material (nombre, época, tipología)
 - **Nota:** Se asigna automáticamente al museo de su época
 - **Editar/Eliminar:** Operaciones estándar
 
-#### 5️⃣ **Hallazgos** (registros de descubrimientos)
+#### 5️ **Hallazgos** (registros de descubrimientos)
 - **Nuevo:** Crea un hallazgo seleccionando:
   - Arqueólogo que realizó el hallazgo
   - Yacimiento donde fue hallado
@@ -118,7 +118,7 @@ La aplicación tiene 5 pestañas principales:
 
 ---
 
-## 📂 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 Arquealia/
@@ -160,7 +160,7 @@ Arquealia/
 
 ---
 
-## 🛠️ Tecnologías
+##  Tecnologías
 
 | Tecnología | Versión | Uso |
 |---|---|---|
@@ -174,7 +174,7 @@ Arquealia/
 
 ---
 
-## 🧪 Pruebas
+## Pruebas
 
 Consulta `TESTS.md` para ver:
 - Plan detallado de pruebas (16 casos)
@@ -189,7 +189,7 @@ Resumen: La aplicación ha sido testeada en:
 
 ---
 
-## 📝 Documentación
+## Documentación
 
 - **MEMORIA.md** – Documento académico completo del proyecto (requisitos, diseño, implementación)
 - **TESTS.md** – Plan de pruebas, casos y resultados
@@ -197,7 +197,7 @@ Resumen: La aplicación ha sido testeada en:
 
 ---
 
-## 🐛 Solución de Problemas
+## Solución de Problemas
 
 ### "No se puede conectar a MySQL"
 - Verifica que MySQL esté en marcha (XAMPP Control Panel)
@@ -218,7 +218,7 @@ Resumen: La aplicación ha sido testeada en:
 
 ---
 
-## 📞 Soporte y Contacto
+## Soporte y Contacto
 
 Para reportar bugs o sugerencias:
 - Abre un issue en el repositorio
@@ -229,17 +229,15 @@ Para reportar bugs o sugerencias:
 ## 📄 Licencia
 
 Este proyecto es de código abierto desarrollado como trabajo académico.  
-Licencia: MIT (2026)
+Licencia: GNU 3.0
 
 ---
 
 ## 🎉 Próximas Versiones (Roadmap)
 
-- **v1.1** – Migración UI a JavaFX
+- **v1.1** – Mejoras en UI
 - **v1.2** – API REST + cliente web
 - **v2.0** – Autenticación y control de roles
-- **v2.1** – Exportación a CSV/PDF
-- **v3.0** – Sincronización remota y en-línea
 
 ---
 
